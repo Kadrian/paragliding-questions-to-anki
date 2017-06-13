@@ -4,7 +4,10 @@ const Q_AND_A_DIR = 'manually-cleaned';
 const DIST_DIR = 'dist';
 
 const getCatalogue = (name) => {
-  const solutions = fs.readFileSync(`./${Q_AND_A_DIR}/${name}-solutions.md`, 'utf8').trim().split('');
+  const solutions = fs.readFileSync(`./${Q_AND_A_DIR}/${name}-solutions.md`, 'utf8')
+    .trim()
+    .split('');
+
   const questions = fs.readFileSync(`./${Q_AND_A_DIR}/${name}-questions.md`, 'utf8')
     .trim()
     .split('\n\n')
@@ -16,15 +19,19 @@ const getCatalogue = (name) => {
       };
     });
 
-  console.log(solutions.length);
-  console.log(questions.length);
+  console.log(`Parsed solutions and questions for: ${name}`);
+  console.log(`--> Solutions count: ${solutions.length}`);
+  console.log(`--> Questions count: ${questions.length}`);
 
   return questions;
 };
 
 const saveCataloguesAsJSON = (catalogues) => {
   catalogues.forEach(catalogue =>
-    fs.writeFileSync(`./${DIST_DIR}/${catalogue.name}-output.json`, JSON.stringify(catalogue.questions, null, 2))
+    fs.writeFileSync(
+      `./${DIST_DIR}/${catalogue.name}-output.json`,
+      JSON.stringify(catalogue.questions, null, 2)
+    )
   );
 };
 
@@ -46,7 +53,10 @@ const saveForAnki = (catalogues) => {
       return [front.replace(';', ',.'), back].join(';');
     });
 
-    fs.writeFileSync(`./${DIST_DIR}/${catalogue.name}-output-anki.csv`, questions.join('\n'));
+    fs.writeFileSync(
+      `./${DIST_DIR}/${catalogue.name}-output-anki.csv`,
+      questions.join('\n')
+    );
   })
 };
 
@@ -76,7 +86,10 @@ const saveCustomCSV = (catalogues) => {
       return [q, a1, a2, a3, a4, null, null, null, null, null, null, correctAnswer].join(',');
     });
 
-    fs.writeFileSync(`./${catalogue.name}-output-custom.csv`, questions.join('\n'));
+    fs.writeFileSync(
+      `./${catalogue.name}-output-custom.csv`,
+      questions.join('\n')
+    );
   })
 };
 
