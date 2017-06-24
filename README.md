@@ -30,7 +30,7 @@ You will need an OS X / unix machine for our development scripts to work.
 
 You need at least node 6:
 
-- install nvm https://github.com/creationix/nvm)
+- install nvm https://github.com/creationix/nvm
 - add the necessary lines to your `.bash_profile` / `.zshrc` or similar.
 
 ```
